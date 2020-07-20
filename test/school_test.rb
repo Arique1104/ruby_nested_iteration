@@ -54,11 +54,33 @@ class SchoolTest < Minitest::Test
   end
 
   def test_it_can_sort_all_students
-    skip
+  skip
     @school.add_course(@course1)
     @school.add_course(@course2)
     @school.add_course(@course3)
-    
+
+    @school.sort_students
+
+    students = [
+      @student1,
+      @student2,
+      @student3,
+      @student4,
+      @student5,
+      @student6,
+      @student7
+    ]
+    # require "pry"; binding.pry
+    students.each do |student|
+      assert @school.houses.include?(student.house)
+    end
+  end
+
+  def test_it_can_produce_unique_students
+    @school.add_course(@course1)
+    @school.add_course(@course2)
+    @school.add_course(@course3)
+
     @school.sort_students
 
     students = [
@@ -71,17 +93,14 @@ class SchoolTest < Minitest::Test
       @student7
     ]
 
-    students.each do |student|
-      assert @school.houses.include?(student.house)
-    end
   end
 
   def test_it_can_list_all_students_by_name
-    skip
+    # skip
     @school.add_course(@course1)
     @school.add_course(@course2)
     @school.add_course(@course3)
-    
+
     expected = [
       'Malfoy',
       'Ron',
